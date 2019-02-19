@@ -226,17 +226,19 @@ class ItTech:
 
 class Customer():
     """Defines the customer object"""
-    def __init__(self, name, level, issue, patience):
+    def __init__(self, name, level, issue_type, issue):
         """Provide the initialization variables for the class"""
         # basics
         self.name = name
         self.level = level
         # attributes
+        self.issue_type = issue_type
         self.issue = issue
-        self.patience = patience
-        # define experience available
+        self.patience = randint(1, 100)
+        # define experience available to technician on success
         for i in range(0, 5):
             if LEVEL_BOUNDS[i][0] <= self.level <= LEVEL_BOUNDS[i][1]:
+                # random value between current level boundaries
                 self.exp = randint(LEVEL_BOUNDS[i][0], LEVEL_BOUNDS[i][1])
 
 
