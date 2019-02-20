@@ -25,7 +25,6 @@ class ItTech:
         self.exp = 0
         self.charisma = randint(1, 100)
         # initialize skill stats
-        self.disaster = 0
         self.password = 0
         self.hardware = 0
         self.software = 0
@@ -41,7 +40,7 @@ class ItTech:
     def __str__(self):
         """Defines the string response"""
         return self.name + " is level " + str(self.level) \
-            + " with " + str(self.exp) + " experience." \
+            + " with " + str(self.exp) + " experience points." \
             + "\nCharisma: " + str(self.charisma) + "%" \
             + "\nChance of disaster: " + str(self.disaster) + "%" \
             + "\nPassword reset skill: " + str(self.password) + "%" \
@@ -82,7 +81,7 @@ class ItTech:
             if self.disaster:
                 self.disaster -= randint(1, 3)
             else:
-                self.disaster = randint(75, 100)
+                self.disaster = randint(75, 95)
             if self.password:
                 self.password += randint(1, 3)
             else:
@@ -238,13 +237,18 @@ class Customer():
         # define experience available to technician on success
         for i in range(0, 5):
             if LEVEL_BOUNDS[i][0] <= self.level <= LEVEL_BOUNDS[i][1]:
+                # rebase lowest boundary if it's 0 or below
+                low = LEVEL_BOUNDS[i][0]
+                if low <= 0:
+                    low = 1
                 # random value between current level boundaries
-                self.exp = randint(LEVEL_BOUNDS[i][0], LEVEL_BOUNDS[i][1])
+                self.exp = randint(low, LEVEL_BOUNDS[i][1])
 
 
     def __str__(self):
         """Defines the string response"""
         return self.name + " is level " + str(self.level) \
+            + "\nIssue type: " + self.issue_type \
             + "\nIssue: " + self.issue \
             + "\nPatience: " + str(self.patience) + "%" \
             + "\nExperience available: " + str(self.exp) + "\n"
