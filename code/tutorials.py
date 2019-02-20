@@ -62,7 +62,8 @@ def start_tutored(player, manager):
     print(customer.issue_type.capitalize() + " issue solved!")
     print("")
     input(manager + ": Congratulations! You successfully helped this customer. ")
-    input(manager + ": You've earned " + str(customer.exp) + " experience points from this helpdesk issue. ")
+    input(manager + ": You've earned " + str(customer.exp) \
+        + " experience points from this helpdesk issue. ")
     player.add_exp(customer.exp)
     input(manager + ": When you achieve enough experience, you'll level up. ")
     input(manager + ": This will increase your skills and even unlock new skills. ")
