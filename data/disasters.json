@@ -42,6 +42,7 @@
         "wiped Active Directory",
         "corrupted the file server",
         "published confidential files to the internet",
-        "deleted the database"
+        "deleted the database",
+        "let all the server hamsters escape"
     ]
 }

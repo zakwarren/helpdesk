@@ -51,6 +51,11 @@ class ItTech:
             + "\nServer skill: " + str(self.server) + "%\n"
 
 
+    def __repr__(self):
+        """Displays the technician's name when printing lists"""
+        return self.name
+
+
     def add_exp(self, exp):
         """
         Adds experience points
@@ -67,7 +72,7 @@ class ItTech:
         if self.exp >= max_exp:
             self.level += 1
             self.exp -= max_exp
-            print("Level up!")
+            print(self.name + ": Level up!")
             # increase skill stats
             self.skill_load()
 
@@ -252,3 +257,13 @@ class Customer():
             + "\nIssue: " + self.issue \
             + "\nPatience: " + str(self.patience) + "%" \
             + "\nExperience available: " + str(self.exp) + "\n"
+
+
+    def __repr__(self):
+        """Displays the customer's name when printing lists"""
+        return self.name
+
+
+    def lose_patience(self):
+        """Reduces the patience value while waiting for service"""
+        self.patience -= randint(1, 3)

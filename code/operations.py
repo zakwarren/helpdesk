@@ -12,7 +12,9 @@ def import_data():
         data_issues = json.load(f)
     with open('data/disasters.json') as f:
         data_disasters = json.load(f)
-    return data_names, data_issues, data_disasters
+    with open('data/options.json') as f:
+        data_options = json.load(f)
+    return data_names, data_issues, data_disasters, data_options
 
 
 def random_customer(data_names, data_issues, level_min, level_max):
@@ -42,6 +44,40 @@ def random_technician(data_names, level_min, level_max):
     level = random.randint(level_min, level_max)
     technician = characters.ItTech(name, level)
     return technician
+
+
+def random_options(data_options, customer):
+    """Generate a random set of four options for the problem"""
+    options_list = data_options[customer.issue_type]
+    options = []
+    for _ in range(0, 4):
+        opt = random.choice(options_list)
+        options.append(opt)
+        options_list.remove(opt)
+    return options
+
+
+def select_customer(player, queue):
+    """Take user input and select customer from helpdesk queue"""
+    print("Helpdesk queue: " + str(queue))
+    to_help = input(player.name + ": Who should I help? Number: ")
+    print("")
+    # normalise choice and apply
+    try:
+        if not to_help:
+            to_help = 0
+        else:
+            to_help = int(to_help)
+        if to_help <= 0:
+            to_help = 0
+        elif to_help > len(queue):
+            to_help = len(queue) - 1
+        else:
+            to_help -= 1
+    except:
+        to_help = 0
+    customer = queue[to_help]
+    return customer
 
 
 def solve_issue(technician, customer):
