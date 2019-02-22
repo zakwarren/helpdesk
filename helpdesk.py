@@ -4,7 +4,7 @@ An IT helpdesk simulation game
 
 Help customers with their IT issues,
 avoid disaster and improve your skills
-one ticket at a time. 
+one ticket at a time.
 """
 import sys
 from code import characters
@@ -68,8 +68,20 @@ def main():
                 input(customer.name + ": Hello! " + customer.issue + ". Can you help? ")
 
                 # player to help customer
-                success, disaster = mechanics.player_help_customer(player, customer, queue, data_options)
-                queue, exp, lost = mechanics.handle_outcome(player, customer, queue, success, disaster, data_disasters)
+                success, disaster = mechanics.player_help_customer(
+                    player,
+                    customer,
+                    queue,
+                    data_options
+                )
+                queue, exp, lost = mechanics.handle_outcome(
+                    player,
+                    customer,
+                    queue,
+                    success,
+                    disaster,
+                    data_disasters
+                )
                 print("")
 
                 # decrease patience for anyone waiting in the queue
@@ -88,7 +100,16 @@ def main():
 
             # daily review
             daily_customers_lost += len(queue)
-            operations.review_wording(player, manager, is_manager, "day", days, daily_exp_gained, daily_successes, daily_customers_lost)
+            operations.review_wording(
+                player,
+                manager,
+                is_manager,
+                "day",
+                days,
+                daily_exp_gained,
+                daily_successes,
+                daily_customers_lost
+            )
 
             # aggregate yearly counters
             yearly_exp_gained += daily_exp_gained
@@ -99,7 +120,16 @@ def main():
             days += 1
 
         # yearly review
-        operations.review_wording(player, manager, is_manager, "year", years, yearly_exp_gained, yearly_successes, yearly_customers_lost)
+        operations.review_wording(
+            player,
+            manager,
+            is_manager,
+            "year",
+            years,
+            yearly_exp_gained,
+            yearly_successes,
+            yearly_customers_lost
+        )
         year_choice = input(
             """Choice: 1 = continue to next year
         2 = quit""" \
