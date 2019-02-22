@@ -86,7 +86,7 @@ class ItTech:
             if self.disaster:
                 self.disaster -= randint(1, 3)
             else:
-                self.disaster = randint(75, 95)
+                self.disaster = randint(75, 90)
             if self.password:
                 self.password += randint(1, 3)
             else:

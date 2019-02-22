@@ -1,3 +1,6 @@
+"""
+Provides the game start and tutorials
+"""
 import math
 from . import characters
 from . import operations
