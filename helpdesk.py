@@ -4,7 +4,7 @@ An IT helpdesk simulation game
 
 Help customers with their IT issues,
 avoid disaster and improve your skills
-one ticket at a time.
+one ticket at a time. 
 """
 import sys
 from code import characters
@@ -16,13 +16,13 @@ from code import mechanics
 def main():
     """Coordinates the main programme logic"""
     # initial setup
-    is_manager = False
-    team = []
     hours_in_day = 8
     days_in_year = 6
     manager = "Lukasz"
-    #player = tutorials.setup_player(manager)
-    player = characters.ItTech("Mikey", 1)
+    player = tutorials.setup_player(manager)
+    #player = characters.ItTech("Mikey", 1)
+    team = [player]
+    team_helped = []
 
     # main game loops
     years = 0
@@ -38,7 +38,6 @@ def main():
 
             # daily loop
             print("Day: " + str(days+1) + "\n")
-            print(player)
             queue = []
             daily_exp_gained = 0
             daily_successes = 0
@@ -55,36 +54,46 @@ def main():
                 else:
                     level_max = player.level + 5
 
-                # customer arrival at helpdesk
-                customer = operations.random_customer(data_names, data_issues, level_min, level_max)
-                print("A customer arrived at the helpdesk.")
-                queue.append(customer)
+                # manage customer arrival at helpdesk
+                mechanics.customer_arrival(team, queue, data_names, data_issues, level_min, level_max)
 
-                # team management
-                print("Your team: " + str(team))
-
-                # which customer to help
-                customer = operations.select_customer(player, queue)
-                input(customer.name + ": Hello! " + customer.issue + ". Can you help? ")
-
-                # player to help customer
-                success, disaster = mechanics.player_help_customer(
-                    player,
-                    customer,
-                    queue,
-                    data_options
-                )
-                queue, exp, lost = mechanics.handle_outcome(
-                    player,
-                    customer,
-                    queue,
-                    success,
-                    disaster,
-                    data_disasters
-                )
-                print("")
+                while len(team) > 0:
+                    # team management
+                    technician = operations.select_person(player, team, "technician")
+                    team_choice = operations.team_options(player, technician)
+                    if team_choice == "change":
+                        # go back to start of team management loop
+                        continue
+                    elif team_choice == "ticket":
+                        # move team member to helped already list
+                        team_helped.append(technician)
+                        team.remove(technician)
+                        # which customer to help
+                        customer = operations.select_person(player, queue, "customer")
+                        input(customer.name + ": Hello! " + customer.issue + ". Can you help? ")
+                        # check whether technician is player or not and act accordingly
+                        if technician == player:
+                            # player to help customer
+                            success, disaster = mechanics.player_help_customer(
+                                player,
+                                customer,
+                                data_options
+                            )
+                        else:
+                            input(technician.name + " is attempting to solve the issue ")
+                            success, disaster = operations.solve_issue(technician, customer)
+                        # deal with the outcome
+                        queue, exp, lost = mechanics.handle_outcome(
+                            technician,
+                            customer,
+                            queue,
+                            success,
+                            disaster,
+                            data_disasters
+                        )
 
                 # decrease patience for anyone waiting in the queue
+                print("")
                 for custom in queue:
                     custom.lose_patience()
 
@@ -95,6 +104,11 @@ def main():
                 else:
                     daily_successes += 1
 
+                # move team back to ready list
+                while len(team_helped) > 0:
+                    transfer = team_helped.pop()
+                    team.append(transfer)
+
                 # iterate game time
                 hours += 1
 
@@ -103,7 +117,6 @@ def main():
             operations.review_wording(
                 player,
                 manager,
-                is_manager,
                 "day",
                 days,
                 daily_exp_gained,
@@ -123,20 +136,25 @@ def main():
         operations.review_wording(
             player,
             manager,
-            is_manager,
             "year",
             years,
             yearly_exp_gained,
             yearly_successes,
             yearly_customers_lost
         )
-        year_choice = input(
-            """Choice: 1 = continue to next year
-        2 = quit""" \
-            + "\n" + player.name + ": "
-        )
+        if player.is_manager is True:
+            year_choice_options = """Choice: 1 = continue to next year
+        2 = quit
+        3 = hire new IT technician"""
+        else:
+            year_choice_options = """Choice: 1 = continue to next year
+        2 = quit"""
+        year_choice = input(year_choice_options + "\n" + player.name + ": ")
+        print("")
         if year_choice == "2":
             sys.exit()
+        elif player.is_manager is True and year_choice == "3":
+            mechanics.hire_new_technician(player, team, data_names, level_min, level_max)
 
 
 if __name__ == "__main__":

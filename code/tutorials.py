@@ -57,7 +57,7 @@ def start_tutored(player, manager):
     print("Helpdesk queue: " + str(queue))
     print("")
     input(manager + ": First enter their number to select them from the queue. ")
-    customer = operations.select_customer(player, queue)
+    customer = operations.select_person(player, queue, "customer")
     # solving the issue
     input(manager + ": Great, now let's see what they need help with. ")
     print("")
@@ -96,7 +96,7 @@ def start_tutored(player, manager):
     # queue
     print("A customer arrived at the helpdesk.")
     queue.append(customer)
-    customer = operations.select_customer(player, queue)
+    customer = operations.select_person(player, queue, "customer")
     # solving the issue
     input(customer.name + ": Hey! " + customer.issue + ". Can you help? ")
     input(
@@ -141,7 +141,7 @@ def start_tutored(player, manager):
     # queue
     print("A customer arrived at the helpdesk.")
     queue.append(customer)
-    customer = operations.select_customer(player, queue)
+    customer = operations.select_person(player, queue, "customer")
     # solving the issue
     input(customer.name + ": Excuse me. " + customer.issue + ". Can you fix it? ")
     input(

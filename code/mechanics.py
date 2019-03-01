@@ -35,7 +35,7 @@ def handle_outcome(technician, customer, queue, success, disaster, data_disaster
     return queue, exp, lost
 
 
-def player_help_customer(player, customer, queue, data_options):
+def player_help_customer(player, customer, data_options):
     """Player interaction to help customer with their issue"""
     # options available
     options = operations.random_options(data_options, customer)
@@ -58,3 +58,49 @@ def player_help_customer(player, customer, queue, data_options):
             success = False
             disaster = True
     return success, disaster
+
+
+def customer_arrival(team, queue, data_names, data_issues, level_min, level_max):
+    """Manage customer arrival at helpdesk based on team size"""
+    team_size = len(team)
+    for _ in range(0, team_size):
+        customer = operations.random_customer(data_names, data_issues, level_min, level_max)
+        queue.append(customer)
+    if team_size == 1:
+        arrival_descriptor = "A customer has"
+    else:
+        arrival_descriptor = str(team_size) + " customers have"
+    print(arrival_descriptor + " arrived at the helpdesk.")
+
+
+def hire_new_technician(player, team, data_names, level_min, level_max):
+    """Review and hire new technicians"""
+    input(player.name + ": Let's review the resumes of our current candidates. ")
+    # generate candidates
+    resumes = []
+    for _ in range(0, 3):
+        tech = operations.random_technician(data_names, level_min, level_max)
+        resumes.append(tech)
+    # select a candidate and get player choice
+    hired = False
+    while True:
+        person = operations.select_person(player, resumes, "resumes")
+        while True:
+            choice_string = "Choice: 1 = see " + person.name + """'s stats
+        2 = hire """ + person.name + """
+        3 = view another resume"""
+            candidate_choice = input(choice_string + "\n" + player.name + ": ")
+            # action choice
+            if candidate_choice == "1":
+                print(person)
+            elif candidate_choice == "2":
+                input(person.name + " hired! ")
+                team.append(person)
+                hired = True
+                break
+            elif candidate_choice == "3":
+                break
+            else:
+                print("Unrecognised choice")
+        if hired is True:
+            break

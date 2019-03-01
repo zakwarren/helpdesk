@@ -60,12 +60,22 @@ def random_options(data_options, customer):
     return options
 
 
-def select_customer(player, queue):
-    """Take user input and select customer from helpdesk queue"""
-    print("Helpdesk queue: " + str(queue))
+def select_person(player, queue, queue_type):
+    """Take user input and select person from queue"""
+    if queue_type == "customer":
+        queue_label = "Helpdesk queue: "
+    elif queue_type == "technician":
+        queue_label = "Your team: "
+        # check if player is only member of the queue
+        if queue == [player]:
+            person = player
+            return person
+    elif queue_type == "resumes":
+        queue_label = "Candidates: "
+    print(queue_label + str(queue))
     to_help = input(player.name + ": Who should I select? Number: ")
     print("")
-    # normalise choice and apply
+    # normalize choice and apply
     try:
         if not to_help:
             to_help = 0
@@ -79,8 +89,31 @@ def select_customer(player, queue):
             to_help -= 1
     except:
         to_help = 0
-    customer = queue[to_help]
-    return customer
+    person = queue[to_help]
+    return person
+
+
+def team_options(player, technician):
+    """Provide team organisation options to the player"""
+    while True:
+        if player.is_manager is True:
+            choice_string = "\nChoice: 1 = see " + technician.name + """'s stats
+        2 = assign helpdesk ticket
+        3 = choose a different technician"""
+        else:
+            choice_string = "\nChoice: 1 = see " + technician.name + """'s stats
+        2 = assign helpdesk ticket"""
+        team_choice = input(choice_string + "\n" + player.name + ": ")
+        if team_choice == "1":
+            print(technician)
+        elif team_choice == "2":
+            choice = "ticket"
+            return choice
+        elif team_choice == "3" and player.is_manager is True:
+            choice = "change"
+            return choice
+        else:
+            print("Unrecognised choice")
 
 
 def solve_issue(technician, customer):
@@ -176,10 +209,10 @@ def review_rating(technician, successes, losses):
     return rating, exp
 
 
-def review_wording(player, manager, is_manager, review_type, type_number, exp, successes, losses):
+def review_wording(player, manager, review_type, type_number, exp, successes, losses):
     """Work out what to say for the review"""
     # wording for managers
-    if is_manager is True:
+    if player.is_manager is True:
         you = "Your team"
     else:
         you = "You"
@@ -196,7 +229,7 @@ def review_wording(player, manager, is_manager, review_type, type_number, exp, s
             input(manager + ": Congratulations! " \
                 + "You've earned a bonus of " + str(exp_gift) + " experience points. ")
             player.add_exp(exp_gift)
-        if is_manager is False and player.level > characters.LEVEL_BOUNDS[4][0]:
-            is_manager = True
+        if player.is_manager is False and player.level > characters.LEVEL_BOUNDS[3][0]:
+            player.is_manager = True
             input(manager + ": Congratulations! You've been promoted to a manager! ")
     print("")

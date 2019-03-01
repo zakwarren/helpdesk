@@ -23,6 +23,7 @@ class ItTech:
         self.name = name
         self.level = level
         self.exp = 0
+        self.is_manager = False
         self.charisma = randint(1, 100)
         # initialize skill stats
         self.password = 0
@@ -39,8 +40,13 @@ class ItTech:
 
     def __str__(self):
         """Defines the string response"""
+        if self.is_manager is True:
+            rank = "IT Manager"
+        else:
+            rank = "IT Helpdesk Technician"
         return self.name + " is level " + str(self.level) \
             + " with " + str(self.exp) + " experience points." \
+            + "\nRank: " + rank \
             + "\nCharisma: " + str(self.charisma) + "%" \
             + "\nChance of disaster: " + str(self.disaster) + "%" \
             + "\nPassword reset skill: " + str(self.password) + "%" \
