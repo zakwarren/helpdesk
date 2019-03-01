@@ -55,7 +55,14 @@ def main():
                     level_max = player.level + 5
 
                 # manage customer arrival at helpdesk
-                mechanics.customer_arrival(team, queue, data_names, data_issues, level_min, level_max)
+                mechanics.customer_arrival(
+                    team,
+                    queue,
+                    data_names,
+                    data_issues,
+                    level_min,
+                    level_max
+                )
 
                 while len(team) > 0:
                     # team management

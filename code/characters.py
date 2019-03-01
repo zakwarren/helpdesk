@@ -71,7 +71,7 @@ class ItTech:
         # set experienced required to level up
         for i in range(0, 5):
             if LEVEL_BOUNDS[i][0] <= self.level <= LEVEL_BOUNDS[i][1]:
-                # max experience for a level 
+                # max experience for a level
                 # is set as next level's upper bound
                 max_exp = LEVEL_BOUNDS[i+1][1]
         # level up if appropriate and reset experience

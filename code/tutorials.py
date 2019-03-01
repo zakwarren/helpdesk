@@ -78,7 +78,8 @@ def start_tutored(player, manager):
     queue.remove(customer)
     print("")
     input(manager + ": Congratulations! You successfully helped this customer. ")
-    input(manager + ": You've earned " + str(customer.exp) + " experience points from this helpdesk issue. ")
+    input(manager + ": You've earned " + str(customer.exp) \
+        + " experience points from this helpdesk issue. ")
     player.add_exp(customer.exp)
     input(manager + ": When you achieve enough experience, you'll level up. ")
     input(manager + ": This will increase your skills and even unlock new skills. ")
@@ -112,8 +113,10 @@ def start_tutored(player, manager):
     exp = math.ceil(customer.exp / 2)
     input(manager + ": Failure is a good opportunity to learn. " \
         + "This time you've gained " + str(exp) + " experience. ")
-    input(manager + ": Fortunately, this customer has " + str(customer.patience) + "% patience. ")
-    input(manager + ": Each time you fail their patience will decrease. When it reaches 0, they'll leave. ")
+    input(manager + ": Fortunately, this customer has " \
+        + str(customer.patience) + "% patience. ")
+    input(manager + ": Each time you fail their patience will decrease. " \
+        + "When it reaches 0, they'll leave. ")
     input(manager + ": Let's try again! ")
     input(
         """\nChoice: 1 = Reset password
