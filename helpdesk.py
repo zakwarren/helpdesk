@@ -7,7 +7,6 @@ avoid disaster and improve your skills
 one ticket at a time. 
 """
 import sys
-from code import characters
 from code import operations
 from code import tutorials
 from code import mechanics
@@ -20,7 +19,6 @@ def main():
     days_in_year = 6
     manager = "Lukasz"
     player = tutorials.setup_player(manager)
-    #player = characters.ItTech("Mikey", 1)
     team = [player]
     team_helped = []
 
