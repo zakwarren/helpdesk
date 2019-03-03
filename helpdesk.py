@@ -4,7 +4,7 @@ An IT helpdesk simulation game
 
 Help customers with their IT issues,
 avoid disaster and improve your skills
-one ticket at a time. 
+one ticket at a time.
 """
 import sys
 from code import operations
