@@ -4,7 +4,7 @@ Defines the regular operations conducted by the game mechanics
 import random
 import json
 import math
-from . import characters
+import characters
 
 
 def import_data():

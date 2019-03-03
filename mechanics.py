@@ -2,7 +2,7 @@
 Provides the main game mechanics
 """
 import math
-from . import operations
+import operations
 
 
 def handle_outcome(technician, customer, queue, success, disaster, data_disasters):

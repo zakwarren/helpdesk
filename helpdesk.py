@@ -7,14 +7,16 @@ avoid disaster and improve your skills
 one ticket at a time.
 """
 import sys
-from code import operations
-from code import tutorials
-from code import mechanics
+import operations
+import tutorials
+import mechanics
+import data
 
 
 def main():
     """Coordinates the main programme logic"""
     # initial setup
+    data.restore_lists()
     hours_in_day = 8
     days_in_year = 6
     manager = "Lukasz"
