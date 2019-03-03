@@ -1,0 +1,48 @@
+{
+    "password": [
+        "locked the account",
+        "deleted the account",
+        "corrupted the account",
+        "published all passwords"
+    ],
+    "hardware": [
+        "destroyed the hardware",
+        "smashed the screen",
+        "damaged the cables",
+        "bricked the machine",
+        "spilled four litres of coffee on the machine",
+        "threw the computer out the window"
+    ],
+    "software": [
+        "formatted the computer",
+        "corrupted all the files",
+        "wiped all emails",
+        "deleted all the work",
+        "corrupted the operating system",
+        "bricked the machine"
+    ],
+    "antivirus": [
+        "unleashed a major virus",
+        "executed ransomware",
+        "installed a trojan",
+        "installed a lot of malware",
+        "let hackers onto the system",
+        "clicked a suspicious link and entered your credentials"
+    ],
+    "network": [
+        "smashed the core switch",
+        "cut the network cables",
+        "spilled coffee on the core switch",
+        "blocked all access to the internet",
+        "tripped over the fibre optic cable"
+    ],
+    "server": [
+        "set fire to the server farm",
+        "formatted the server",
+        "wiped Active Directory",
+        "corrupted the file server",
+        "published confidential files to the internet",
+        "deleted the database",
+        "let all the server hamsters escape"
+    ]
+}
