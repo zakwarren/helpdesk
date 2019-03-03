@@ -75,8 +75,10 @@ def default_disasters():
     ]
 }"""
     try:
-        with open('data/disasters.json', 'w') as outfile:
-            outfile.write(disasters)
+        fname = 'data/disasters.json'
+        if os.path.isfile(fname) is False:
+            with open(fname, 'w') as outfile:
+                outfile.write(disasters)
     except:
         print("Failed to write default disasters list to data directory")
 
@@ -146,8 +148,10 @@ def default_issues():
     ]
 }"""
     try:
-        with open('data/issues.json', 'w') as outfile:
-            outfile.write(issues)
+        fname = 'data/issues.json'
+        if os.path.isfile(fname) is False:
+            with open(fname, 'w') as outfile:
+                outfile.write(issues)
     except:
         print("Failed to write default issues list to data directory")
 
@@ -44128,8 +44132,10 @@ def default_names():
     "Zysk"
     ]"""
     try:
-        with open('data/names.json', 'w', encoding="utf-8") as outfile:
-            outfile.write(names)
+        fname = 'data/names.json'
+        if os.path.isfile(fname) is False:
+            with open(fname, 'w', encoding="utf-8") as outfile:
+                outfile.write(names)
     except:
         print("Failed to write default names list to data directory")
 
@@ -44181,7 +44187,9 @@ def default_options():
     ]
 }"""
     try:
-        with open('data/options.json', 'w') as outfile:
-            outfile.write(options)
+        fname = 'data/options.json'
+        if os.path.isfile(fname) is False:
+            with open(fname, 'w') as outfile:
+                outfile.write(options)
     except:
         print("Failed to write default options list to data directory")
