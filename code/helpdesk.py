@@ -175,6 +175,9 @@ def main():
             sys.exit()
         elif player.is_manager is True and year_choice == "3":
             mechanics.hire_new_technician(player, team, data_names, level_min, level_max)
+        
+        # iterate game time
+        years += 1
 
 
 if __name__ == "__main__":
