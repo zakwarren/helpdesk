@@ -1,7 +1,7 @@
 # Helpdesk simulator game
 
-The helpdesk simulator is a simple, text-based adventure game where
-you play as a new, bright-eyed IT helpdesk technician. As a new
+The original helpdesk simulator is a simple, text-based adventure game
+where you play as a new, bright-eyed IT helpdesk technician. As a new
 employee at Incompecorp, your job is to help customers with their IT
 issues, avoid disaster and improve your skills one ticket at a time.
 
@@ -9,6 +9,8 @@ When you're a high enough level, you'll be promoted to an IT manager.
 It's then up to you to hire new technicians and manage the IT helpdesk
 tickets, while training your new hires, to achieve the best outcome
 possible.
+
+Check out the sequel: [Helpdesk Simulator 2: Turn It Off and On Again](https://github.com/zakwarren/helpdesk-off-and-on)
 
 ## Quick start
 
@@ -38,7 +40,7 @@ This app is written in python 3.6.
 
 ## Authors
 
-- **zakwarren** - *Initial work*
+- **zakwarren** - _Initial work_
 
 ## License
 
